@@ -1,15 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmls:th="http://www.thymeleaf.org">
 <head>
-	//no esta visible 
+	<!-- no esta visible --> 
     <meta charset="UTF-8">
-    //tipo de datos
+    <!-- tipo de datos --> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
 </head>
 <body>
+	<!-- del h1 al h6 el h1 es el mas grande debe tener listas -->
+	
 	<h1>Hola mundo</h1>  
-
+	<!-- encabezado-->
+	<table>
+		<thead>
+			<!--tr pa filas-->
+			<tr>
+				<!--th columnas-->
+				<!-- los datos deb o tener en este caso 4-->
+				<th>ID</th>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>Cedula</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!--con tymeleaf apoya a ver cuantos elemntos van a la base de datos-->
+			<!--th: para acceder alos metodos-->
+			<!-- sss-->
+			<tr th:each="propietario:${propietarios}">
+				<td th:text="${propietario.id}"></td>
+				<td th:text="${propietario.nombre}"></td>
+				<td th:text="${propietario.apellido}"></td>
+				<td th:text="${propietario.cedula}"></td>
+				
+			</tr>
+		</tbody>
+	</table>
 </body>
+
+
 </html>

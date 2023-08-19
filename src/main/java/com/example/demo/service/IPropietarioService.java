@@ -2,17 +2,14 @@ package com.example.demo.service;
 
 import java.util.List;
 
-import com.example.demo.repository.modelo.Propietario;
+import com.example.demo.modelo.Propietario;
 
 public interface IPropietarioService {
-
+	
 	public void agregar(Propietario propietario);
-	
-	public void actualizar(Propietario propietario);
-	
-	public Propietario buscarPorCedula(String cedula);
-	
-	public void borrarPorCedula(String cedula);
-	public List<Propietario> buscarTodos();
-	
+	public void modificar(Propietario propietario);
+	public Propietario encontrarId(Integer id);
+	public void borrar (Integer id);
+	public List<Propietario> reporte();
+
 }

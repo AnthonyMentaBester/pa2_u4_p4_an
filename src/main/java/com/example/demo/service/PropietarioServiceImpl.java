@@ -3,61 +3,52 @@ package com.example.demo.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.repository.IPropietarioRepository;
-import com.example.demo.repository.modelo.Propietario;
+import com.example.demo.modelo.Propietario;
+import com.example.demo.repository.IPropietarioRepo;
 
-import jakarta.transaction.Transactional;
-import jakarta.transaction.Transactional.TxType;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
-@Service
+@Repository
+@Transactional
 public class PropietarioServiceImpl implements IPropietarioService{
-
-	@Autowired
-	private IPropietarioRepository propietarioRepository;
 	
+	@Autowired
+	private IPropietarioRepo iPropietarioRepo;
 
 	@Override
-	//@Transactional
 	public void agregar(Propietario propietario) {
 		// TODO Auto-generated method stub
-		System.out.println("Service: " + TransactionSynchronizationManager.isActualTransactionActive());
-		
-
+		this.iPropietarioRepo.insertar(propietario);
 	}
 
 	@Override
-	public void actualizar(Propietario propietario) {
+	public void modificar(Propietario propietario) {
 		// TODO Auto-generated method stub
-		this.propietarioRepository.actualizar(propietario);
+		this.iPropietarioRepo.actualizar(propietario);
 	}
 
 	@Override
-	public Propietario buscarPorCedula(String cedula) {
+	public Propietario encontrarId(Integer id) {
 		// TODO Auto-generated method stub
-		return this.propietarioRepository.seleccionarPorCedula(cedula);
-		
+		return this.iPropietarioRepo.buscarId(id);
 	}
 
 	@Override
-	public void borrarPorCedula(String cedula) {
+	public void borrar(Integer id) {
 		// TODO Auto-generated method stub
-		this.propietarioRepository.eliminarPorCedula(cedula);
+		this.iPropietarioRepo.eliminar(id);
 	}
-	@Transactional(value = TxType.NEVER)
-	public void prueba() {
-		System.out.println("Metodo: " + TransactionSynchronizationManager.isActualTransactionActive());
-		System.out.println("metodo de prueba");
+
+	@Override
+	public List<Propietario> reporte() {
+		// TODO Auto-generated method stub
+		return this.iPropietarioRepo.buscarTodos();
 	}
+
 	
-	@Override
-	public List<Propietario> buscarTodos() {
-		// TODO Auto-generated method stub
-		return this.propietarioRepository.buscarTodos();
-		
-	}
-	
-	
+
 }
